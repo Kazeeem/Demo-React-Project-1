@@ -1,8 +1,11 @@
 import React from 'react'
+import ProductGrid from "./ProductGrid.jsx";
 
 const PaginationContainer = () => {
     return (
-        <div>PaginationContainer</div>
+        <>
+            <ProductGrid />
+        </>
     )
 }
 export default PaginationContainer
