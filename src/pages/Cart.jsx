@@ -5,8 +5,8 @@ import CartTotals from "../components/CartTotals.jsx";
 import {Link} from "react-router-dom";
 
 const Cart = () => {
-    const user = null;
     const numItemsInCart = useSelector((state) => state.cartState.numItemsInCart)
+    const user = useSelector((state) => state.userState.user);
 
     if (numItemsInCart === 0) {
         return <SectionTitle text="Your cart is empty" />
