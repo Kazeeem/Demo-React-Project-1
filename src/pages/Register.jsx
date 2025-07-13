@@ -1,5 +1,22 @@
-import { Form, Link } from "react-router-dom";
+import {Form, Link, redirect} from "react-router-dom";
 import { FormInput, SubmitBtn } from "../components/index.js";
+import {customFetch} from "../utils/index.jsx";
+import {toast} from "react-toastify";
+
+export const action = async ({request}) => {
+    const formData = await request.formData()
+    const data = Object.fromEntries(formData)
+
+    try {
+        const response = await customFetch.post('/auth/local/register', data);
+        toast.success('Registration was successful')
+        return redirect('/auth/login')
+    } catch (error) {
+        const errorMessage = error?.response?.data?.error?.message || 'Invalid request';
+        toast.error(errorMessage)
+        return null;
+    }
+}
 
 const Login = () => {
     return (
@@ -14,7 +31,7 @@ const Login = () => {
                     <SubmitBtn text="Register" />
                 </div>
 
-                <button type="button" className="btn btn-secondary btn-block">guest user</button>
+                <button type="button" className="btn btn-secondary btn-block capitalize">guest user</button>
                 <p className="text-center">
                     Already a member?
                     <Link to="/auth/login" className="ml-2 link link-hover link-primary capitalize">Login</Link>
