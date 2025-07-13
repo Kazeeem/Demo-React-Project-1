@@ -1,6 +1,39 @@
+import {useSelector} from "react-redux";
+import {SectionTitle} from "../components/index.js";
+import CartItemsList from "../components/CartItemsList.jsx";
+import CartTotals from "../components/CartTotals.jsx";
+import {Link} from "react-router-dom";
+
 const Cart = () => {
+    const user = null;
+    const numItemsInCart = useSelector((state) => state.cartState.numItemsInCart)
+
+    if (numItemsInCart === 0) {
+        return <SectionTitle text="Your cart is empty" />
+    }
+
     return (
-        <div>Cart</div>
+        <>
+            <SectionTitle text="Shopping Cart" />
+            <div className="mt-8 grid gap-8 lg:grid-cols-12">
+                <div className="lg:col-span-8">
+                    <CartItemsList />
+                </div>
+                <div className="lg:col-span-4 lg:pl-4">
+                    <CartTotals />
+
+                    {user ? (
+                        <Link to="/checkout" className="btn btn-primary btn-block mt-8">
+                            Proceed to checkout
+                        </Link>
+                    ) : (
+                        <Link to="/auth/login" className="btn btn-primary btn-block mt-8">
+                            Please Login
+                        </Link>
+                    )}
+                </div>
+            </div>
+        </>
     )
 }
 export default Cart

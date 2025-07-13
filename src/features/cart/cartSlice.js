@@ -11,7 +11,7 @@ const defaultState = {
 };
 
 const getCartFromLocalStorage = () => {
-    return JSON.parse(localStorage.getItem('cart') || defaultState);
+    return JSON.parse(localStorage.getItem('cart')) || defaultState;
 }
 
 const cartSlice = createSlice({
